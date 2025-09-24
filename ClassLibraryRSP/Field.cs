@@ -98,15 +98,15 @@ namespace ClassLibraryRSP
 
                 if (IsGameOver())
                     throw new Exception("Game Over");
+
                 return;
             }
-
-            // Если "будущего" нет — делаем обычный ход и сохраняем его
-            Save();
 
             MoveShapes();
             NewShapes();
             FindAndRemoveGroups();
+
+            Save(); // Сохраняем состояние поля и очков ПОСЛЕ изменений
 
             if (IsGameOver())
                 throw new Exception("Game Over");
