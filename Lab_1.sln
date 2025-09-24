@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryRSP", "ClassLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppRSP", "WpfAppRSP\WpfAppRSP.csproj", "{57AA48EC-D8DD-4AFF-BAD2-503D3A82EC9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectRSP", "TestProjectRSP\TestProjectRSP.csproj", "{12ACC953-BD11-4F3B-9B5D-3082FB4E097B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{57AA48EC-D8DD-4AFF-BAD2-503D3A82EC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57AA48EC-D8DD-4AFF-BAD2-503D3A82EC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57AA48EC-D8DD-4AFF-BAD2-503D3A82EC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12ACC953-BD11-4F3B-9B5D-3082FB4E097B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12ACC953-BD11-4F3B-9B5D-3082FB4E097B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12ACC953-BD11-4F3B-9B5D-3082FB4E097B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12ACC953-BD11-4F3B-9B5D-3082FB4E097B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
