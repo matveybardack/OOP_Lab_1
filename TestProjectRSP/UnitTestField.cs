@@ -49,7 +49,12 @@ namespace TestProjectRSP
             // Сохраняем состояние после ручного изменения
             var saveMethod = typeof(Field).GetMethod("Save", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             saveMethod.Invoke(field, null);
-            Assert.Throws<Exception>(() => field.MoveNext());
+
+            // Получаем внутренний метод IsGameOver
+            var isGameOverMethod = typeof(Field).GetMethod("IsGameOver", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            bool result = (bool)isGameOverMethod.Invoke(field, null);
+
+            Assert.True(result);
         }
     }
 }

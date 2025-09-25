@@ -33,9 +33,11 @@ namespace ClassLibraryRSP
         {
             Random rnd = new Random();
 
-            if (rnd.Next((int)this.age) > 30)
-                // Выбираем случайный элемент
+            double probability = (double)age / (age + 10);
+            if (rnd.NextDouble() < probability)
+            {
                 color = (Colors)rnd.Next(3);
+            }
         }
 
         /// <summary>

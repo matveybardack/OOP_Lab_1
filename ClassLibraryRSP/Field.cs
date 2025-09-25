@@ -193,32 +193,87 @@ namespace ClassLibraryRSP
         }
 
         /// <summary>
-        /// Сбор очков за группы из 3+ одинаковых фигур и их удаление
+        /// Сбор очков за линии из 3+ одинаковых фигур по типу или цвету (по строкам и столбцам)
         /// </summary>
         private void FindAndRemoveGroups()
         {
-            bool[,] visited = new bool[SIZE, SIZE];
-            List<(int, int)> group = new List<(int, int)>();
+            bool[,] toRemove = new bool[SIZE, SIZE];
+            int removedCount = 0;
 
+            // Проверка по строкам
             for (int i = 0; i < SIZE; i++)
             {
-                for (int j = 0; j < SIZE; j++)
+                int j = 0;
+                while (j < SIZE)
                 {
-                    if (field[i, j] == null || visited[i, j])
-                        continue;
-
-                    group.Clear();
-                    DFS(i, j, field[i, j], visited, group);
-
-                    if (group.Count >= 3)
+                    int start = j;
+                    if (field[i, j] == null)
                     {
-                        foreach (var (x, y) in group)
-                            field[x, y] = null;
-
-                        points += group.Count;
+                        j++;
+                        continue;
                     }
+                    // Поиск по типу
+                    Type type = field[i, j].GetType();
+                    int k = j + 1;
+                    while (k < SIZE && field[i, k] != null && field[i, k].GetType() == type)
+                        k++;
+                    if (k - j >= 3)
+                        for (int m = j; m < k; m++)
+                            toRemove[i, m] = true;
+                    // Поиск по цвету
+                    Colors color = field[i, j].Color;
+                    k = j + 1;
+                    while (k < SIZE && field[i, k] != null && field[i, k].Color == color)
+                        k++;
+                    if (k - j >= 3)
+                        for (int m = j; m < k; m++)
+                            toRemove[i, m] = true;
+                    j = Math.Max(k, start + 1);
                 }
             }
+
+            // Проверка по столбцам
+            for (int j = 0; j < SIZE; j++)
+            {
+                int i = 0;
+                while (i < SIZE)
+                {
+                    int start = i;
+                    if (field[i, j] == null)
+                    {
+                        i++;
+                        continue;
+                    }
+                    // Поиск по типу
+                    Type type = field[i, j].GetType();
+                    int k = i + 1;
+                    while (k < SIZE && field[k, j] != null && field[k, j].GetType() == type)
+                        k++;
+                    if (k - i >= 3)
+                        for (int m = i; m < k; m++)
+                            toRemove[m, j] = true;
+                    // Поиск по цвету
+                    Colors color = field[i, j].Color;
+                    k = i + 1;
+                    while (k < SIZE && field[k, j] != null && field[k, j].Color == color)
+                        k++;
+                    if (k - i >= 3)
+                        for (int m = i; m < k; m++)
+                            toRemove[m, j] = true;
+                    i = Math.Max(k, start + 1);
+                }
+            }
+
+            // Удаление и подсчёт очков
+            for (int i = 0; i < SIZE; i++)
+                for (int j = 0; j < SIZE; j++)
+                    if (toRemove[i, j] && field[i, j] != null)
+                    {
+                        field[i, j] = null;
+                        removedCount++;
+                    }
+
+            points += removedCount;
         }
 
         /// <summary>

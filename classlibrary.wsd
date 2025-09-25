@@ -1,0 +1,70 @@
+@startuml yy
+
+' Перечисление цветов
+enum Colors {
+  Blue
+  Red
+  Yellow
+}
+
+' Абстрактный класс Shape
+abstract class Shape {
+  - uint age
+  - Colors color
+  - Random rnd_1
+  + Colors Color
+  + Shape()
+  + abstract Shape GetShape(Shape other)
+  # void RandColor()
+  + void Next()
+}
+
+' Три наследника Shape
+class Triangle {
+  + Triangle()
+  + Shape GetShape(Shape other)
+}
+class Circle {
+  + Circle()
+  + Shape GetShape(Shape other)
+}
+class Square {
+  + Square()
+  + Shape GetShape(Shape other)
+}
+
+Shape <|-- Triangle
+Shape <|-- Circle
+Shape <|-- Square
+
+' Структура для хранения фигуры и позиции
+class ShapeInField {
+  + Shape shape
+  + (int, int) position
+}
+
+' Класс Field
+class Field {
+  - uint SIZE
+  - Shape[,] field
+  - int story
+  - List<List<ShapeInField>> storyFields
+  - int points
+  - List<int> storyPoints
+  + int Points
+  + Shape[,] InnerField
+  + Field(uint size)
+  - void Save()
+  + void Load()
+  + void MoveNext()
+  - void NewShapes()
+  - void MoveShapes()
+  - void FindAndRemoveGroups()
+  - void DFS(int i, int j, Shape shape, bool[,] visited, List<(int, int)> group)
+  - bool IsGameOver()
+}
+
+Field o-- "1..*" ShapeInField
+Field o-- "1" Shape
+
+@enduml
