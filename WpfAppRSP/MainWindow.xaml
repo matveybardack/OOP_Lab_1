@@ -5,48 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppRSP"
         mc:Ignorable="d"
-    Title="Rock-Scissors-Paper" Height="800" Width="800">
+        Title="Rock-Scissors-Paper" Height="800" Width="800"
+        Background="#222831"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Верхняя панель с кнопками и очками -->
+        <Border Grid.Row="0" 
+                Background="#393E46" 
+                CornerRadius="0,0,12,12"
+                Padding="10"
+                Margin="0,0,0,10">
+            <DockPanel LastChildFill="False" HorizontalAlignment="Stretch">
+                <Button x:Name="btnBack"
+                        Content="Назад"
+                        Width="100"
+                        Height="40"
+                        Margin="10,0,10,0"
+                        Click="btnBack_Click"
+                        FontSize="16"
+                        FontFamily="Bahnschrift"
+                        Background="#00ADB5"
+                        Foreground="White"
+                        BorderThickness="0"
+                        DockPanel.Dock="Left"
+                        Cursor="Hand"/>
+                <Button x:Name="btnForward"
+                        Content="Вперёд"
+                        Width="100"
+                        Height="40"
+                        Margin="10,0,10,0"
+                        Click="btnForward_Click"
+                        FontSize="16"
+                        FontFamily="Bahnschrift"
+                        Background="#00ADB5"
+                        Foreground="White"
+                        BorderThickness="0"
+                        DockPanel.Dock="Left"
+                        Cursor="Hand"/>
+                <Label x:Name="lbScore"
+                       Content="Очки: 0"
+                       Width="120"
+                       Height="40"
+                       Margin="10,0,0,0"
+                       FontSize="18"
+                       FontFamily="Bahnschrift"
+                       Foreground="#EEEEEE"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       Background="#222831"
+                       BorderThickness="0"
+                       DockPanel.Dock="Right"/>
+            </DockPanel>
+        </Border>
 
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="5">
-            
-            <Button x:Name="btnBack"
-                    Content="Назад"
-                    Margin="5"
-                    Width="75"
-                    Click="btnBack_Click"
-                    FontSize="14"
-                    FontFamily="Bahnschrift" />
-            
-            <Button x:Name="btnForward"
-                    Content="Вперёд"
-                    Margin="5"
-                    Width="75"
-                    Click="btnForward_Click"
-                    FontSize="14"
-                    FontFamily="Bahnschrift" />
-            
-            <Label x:Name="lbScore"
-                   Content="Очки: 0"
-                   Width="100"
-                   Margin="5"
-                   FontSize="14"
-                   FontFamily="Bahnschrift" />
-        </StackPanel>
-
-        <Canvas x:Name="RSPCanvas"
-                Grid.Row="1"
-                Width="600"
-                Height="600"
-                Background="#FFE6E6E6"/>
-
+        <!-- Основное игровое поле -->
+        <Border Grid.Row="1"
+                Background="#393E46"
+                CornerRadius="16"
+                Padding="20"
+                Margin="40">
+            <Viewbox Stretch="Uniform">
+                <Canvas x:Name="RSPCanvas"
+                        Width="600"
+                        Height="600"
+                        Background="#222831"/>
+            </Viewbox>
+        </Border>
     </Grid>
 </Window>

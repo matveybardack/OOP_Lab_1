@@ -123,9 +123,14 @@ namespace WpfAppRSP
             {
                 _Field.MoveNext();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                if (ex.Message == "Game Over")
+                {
+                    btnForward.IsEnabled = false;
+                    btnBack.IsEnabled = false;
+                }
             }
 
             UpdateCanvas();
