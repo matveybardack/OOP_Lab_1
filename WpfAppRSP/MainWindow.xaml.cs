@@ -21,12 +21,23 @@ namespace WpfAppRSP
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Размер поля
+        private const int FieldSize = 128;
+
         private Field _Field;
+        private double zoomSpeed = 1.1;
         public MainWindow()
         {
             InitializeComponent();
-            _Field = new Field(128);
+            _Field = new Field(FieldSize);
             UpdateCanvas();
+        }
+
+        private void border_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            double zoom = e.Delta > 0 ? zoomSpeed : 1 / zoomSpeed;
+            viewbox.Width *= zoom;
+            viewbox.Height *= zoom;
         }
 
         /// <summary>
@@ -36,14 +47,25 @@ namespace WpfAppRSP
         /// <returns>фигура System.Windows.Shapes.Shape</returns>
         private System.Windows.Shapes.Shape CreateShape(ClassLibraryRSP.Shape figure)
         {
-            System.Windows.Shapes.Shape shape = null;
+            System.Windows.Shapes.Shape shape;
 
             if (figure is Circle)
                 shape = new Ellipse();
             else if (figure is Square)
                 shape = new Rectangle();
-            else if (figure is Triangle)
-                shape = new Polygon();
+            else // Triangle
+            {
+                shape = new Polygon
+                {
+                    Points = new PointCollection
+                    {
+                        new Point(0.5, 0), // Top-center
+                        new Point(0, 1),   // Bottom-left
+                        new Point(1, 1)    // Bottom-right
+                    },
+                    Stretch = Stretch.Fill
+                };
+            }
 
             Color fillColor = System.Windows.Media.Colors.Black;
             switch (figure.Color)
@@ -53,19 +75,6 @@ namespace WpfAppRSP
                 case ClassLibraryRSP.Colors.Blue: fillColor = System.Windows.Media.Colors.Blue; break;
             }
             shape.Fill = new SolidColorBrush(fillColor);
-
-            if (figure is Triangle)
-            {
-                Polygon polygon = (Polygon)shape;
-
-                polygon.Points = new PointCollection {
-                    new Point(0, 0),
-                    new Point(1, 1),
-                    new Point(0, 1)
-                };
-
-                polygon.Stretch = Stretch.Fill;
-            }
 
             shape.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             shape.StrokeThickness = 1;

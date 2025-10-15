@@ -71,8 +71,9 @@
                 Background="#393E46"
                 CornerRadius="16"
                 Padding="20"
-                Margin="40">
-            <Viewbox Stretch="Uniform">
+                Margin="40"
+                MouseWheel="border_MouseWheel">
+            <Viewbox x:Name="viewbox" Stretch="Uniform" Width="600" Height="600">
                 <Canvas x:Name="RSPCanvas"
                         Width="600"
                         Height="600"
