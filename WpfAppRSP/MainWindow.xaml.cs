@@ -35,9 +35,15 @@ namespace WpfAppRSP
 
         private void border_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            Point mousePos = e.GetPosition(zoomGrid);
+
             double zoom = e.Delta > 0 ? zoomSpeed : 1 / zoomSpeed;
-            viewbox.Width *= zoom;
-            viewbox.Height *= zoom;
+
+            scaleTransform.CenterX = mousePos.X;
+            scaleTransform.CenterY = mousePos.Y;
+
+            scaleTransform.ScaleX *= zoom;
+            scaleTransform.ScaleY *= zoom;
         }
 
         /// <summary>

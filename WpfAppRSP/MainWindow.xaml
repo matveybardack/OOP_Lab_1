@@ -73,11 +73,16 @@
                 Padding="20"
                 Margin="40"
                 MouseWheel="border_MouseWheel">
-            <Viewbox x:Name="viewbox" Stretch="Uniform" Width="600" Height="600">
-                <Canvas x:Name="RSPCanvas"
-                        Width="600"
-                        Height="600"
-                        Background="#222831"/>
+            <Viewbox x:Name="viewbox" Stretch="Uniform">
+                <Grid x:Name="zoomGrid" ClipToBounds="True">
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
+                    <Canvas x:Name="RSPCanvas"
+                            Width="600"
+                            Height="600"
+                            Background="#222831"/>
+                </Grid>
             </Viewbox>
         </Border>
     </Grid>
